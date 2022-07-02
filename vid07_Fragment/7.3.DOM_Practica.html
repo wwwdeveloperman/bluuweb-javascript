@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bootstrap Site</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <h2 class="text-center">carrito </h2>
+
+
+<!-- ----------------------------------------------- -->
+  <main class="container mt-3">
+    <div class="row text-center">
+
+      <article class="col-sm-4 mb-3">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">frutilla</h5>
+            <button class="btn  btn-outline-primary"
+                    data-fruta="frutilla" >
+                    Add
+            </button>
+          </div>
+        </div>
+      </article>
+
+
+      <article class="col-sm-4 mb-3">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Banana</h5>
+            <button class="btn btn-outline-primary"
+                    data-fruta="banana" >
+                    Add
+            </button>
+          </div>
+        </div>
+      </article>
+
+
+      <article class="col-sm-4 mb-3">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Manzana</h5>
+            <button class="btn btn-outline-primary"
+                    data-fruta="manzana">
+                    Add
+            </button>
+          </div>
+        </div>
+      </article>
+    </div>
+      
+
+
+  </main>
+  <!-- ----------------------------------------------- -->
+
+
+  <!-- ----------------------------------------------- -->
+  <section class="container mt-3">
+    <ul class="list-group" id="carrito">
+        <!-- template -->
+    </ul>
+  </section>
+  <!-- ----------------------------------------------- -->
+
+
+  <!-- ----------------------------------------------- -->
+  <template id="template">
+    <li class="list-group-item d-flex 
+        justify-content-between
+        align-items-center">
+        <span class="lead">Frutilla</span>
+        <span class="badge bg-primary rounded-pill">12</span>
+    </li>
+  </template>
+  <!-- ----------------------------------------------- -->
+
+
+<script>
+// -----------------------------------------------------------------
+// Practica    prototipo basico de carro de compra:
+
+const carrito  = document.getElementById("carrito");
+const template = document.getElementById("template");
+const fragment = document.createDocumentFragment();
+const botones  = document.querySelectorAll('.card .btn');
+
+/*
+console.log('--- objetos ----');
+console.log(carrito);
+console.log(template);
+console.log(fragment);
+console.log(botones);
+*/
+
+// Objeto carrito :
+const carritoObjeto = {};
+
+const agregarAlCarrito = (e) => {
+
+    //console.log(e.target.dataset);          // <===  OJO *****
+    const producto = {
+        titulo    : e.target.dataset.fruta,
+        id        : e.target.dataset.fruta,
+        cantidad  : 1
+    }//producto
+    
+    // FIND() 
+    if( carritoObjeto.hasOwnProperty(producto.titulo) ) {
+        producto.cantidad = 
+        carritoObjeto[ producto.titulo ].cantidad += 1;
+    }
+    else {
+        carritoObjeto[producto.titulo] = producto;
+    }// if 
+
+    pintarCarrito() 
+    //console.log(carritoObjeto);
+
+};// agregarAlCarrito
+
+
+
+
+const pintarCarrito = ()=>{
+  //console.log('pintar carrito', producto );
+  carrito.textContent = '';
+  
+  Object.values( carritoObjeto).forEach( item =>{
+      // clonar template.
+      const clone = template.content.firstElementChild.cloneNode(true);
+      clone.querySelector('.lead').textContent = item.titulo;
+      clone.querySelector('.badge').textContent = item.cantidad;
+
+      fragment.appendChild( clone );
+  })//
+
+  carrito.appendChild( fragment );
+
+}//pintarCarrito
+
+
+botones.forEach( (btn) =>{
+  //   ojo sin () coz it runs
+  btn.addEventListener("click", agregarAlCarrito )
+})//botones.forEach
+
+// -----------------------------------------------------------------
+
+/*
+
+    <p> un FIND()
+      if( carritoObjeto.hasOwnProperty(producto.titulo) ) {
+        producto.cantidad = 
+        carritoObjeto[ producto.titulo ].cantidad += 1;
+    }
+    else {
+        carritoObjeto[producto.titulo] = producto;
+    }// if 
+    </p>
+
+    <p>
+      liTemplate.content.firstElementChild.cloneNode(true);       
+    </p>
+
+
+*/
+</script>
+</body>
+</html>

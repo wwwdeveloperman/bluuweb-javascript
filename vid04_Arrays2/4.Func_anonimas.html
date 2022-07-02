@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bootstrap Site</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+</head>
+<body>
+<h1>Hello-Bootstrap</h1>
+<script>
+// web -> bluuweb
+// video 04. var vs Let
+
+// -------------------------------------------
+
+console.log("------------------------------------");
+
+// -------------------------------------------
+// FUNCION DECLARATIVA
+console.log( numeroAleatorio(10, 21) );
+function numeroAleatorio( min, max) {
+  console.log('funcion declarada:');
+  return Math.floor( Math.random() * (max - min)) + min;
+}
+// -------------------------------------------
+
+
+// -------------------------------------------
+// FUNCION EXPRESADA
+// lugar incorrecto p llamar funcion expresada
+//console.log( numAzar(100, 201)); 
+const numAzar = function (min, max){
+  console.log('Funcion Expresada:');
+  return Math.floor( Math.random() * (max-min) );
+}
+// abajo de la funcion. (expresada)
+console.log( numAzar(100, 201));
+// -------------------------------------------
+
+
+
+// -------------------------------------------
+// ARROW FUNCTION: 
+//
+// NO this, NO super()
+// NO new.target
+// NO call, apply y bind q establecen scope
+// NO constructor
+// ------------------------------------------
+
+// si no llega el 2do parametro run default
+// 1 a 200
+const azarFlecha = (min=1, max=201) => {
+  return Math.floor( Math.random() * (max-min) );
+  // o bien -> Math.floor( Math.random() * (max-min) );
+}// 
+
+let x = azarFlecha(50,500);
+console.log("Arrow Function:", x );   // ok
+
+x = azarFlecha(50)   // falta 1 parametro
+console.log("Arrow Function:", x );   // ok
+
+// se omite el 1er parametro
+console.log( azarFlecha(null, 500) );       // ok
+console.log( azarFlecha(undefined, 500) );  // ok
+// -------------------------------------------
+
+
+
+
+// -------------------------------------------
+// Arroy y forEach():
+frutas = ["pera", "sandia", "banana", "naranja"];
+//
+frutas.forEach( (e,i) => { 
+  console.log(`elemento ${i}->`, e);
+  
+})
+
+
+
+// -------------------------------------------
+
+// -------------------------------------------
+// -------------------------------------------
+// -------------------------------------------
+// -------------------------------------------
+// -------------------------------------------
+// -------------------------------------------
+
+
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bootstrap Site</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+</head>
+<body>
+<h1>Templates</h1>
+
+
+<ul id="lista">
+  <li> elem estatico <li>
+</ul>
+
+<h2> Practica volcar Foreach() en lista </h2>
+
+<ul id="lista2">
+   <!-- <li class="list">
+        <b>Pais:</b>
+        <span class="text-primary"></span>
+    </li> -->
+</ul>
+
+
+<ul id="lista3">
+  <!-- <li class="list">
+       <b>Pais:</b>
+       <span class="text-primary"></span>
+   </li> -->
+</ul>
+
+
+
+
+<script>
+//   VALORES Y REFERENCIAS:
+/**
+ * cuando asignamos valores primitivos ( boolean, Null, Undefined, Number
+ * String y Symbol ) se usa x valor. 
+ * 
+ * NO primitivos o Complejos (Object, Array y Function) se pasa Referencia
+ * */
+
+let a1 = "hola";
+let b1 = a1;
+
+a1 = "chau";
+console.log('valor de b1 ->',b1);
+
+
+// pendientes del vid
+
+let a = ['hola'];
+let b = a;         //   *b=a
+
+a.push('chau');
+console.log(b); // ===> hola chau  
+
+// --------------------------------------------------------
+
+
+
+
+// *** createElement() :
+// ==========================
+const lista = document.querySelector('#lista');
+const arrayPaises = ["Peru", "arg", "bolivia"];
+
+arrayPaises.forEach(pais => {
+  const li = document.createElement('li');
+  li.textContent = pais;
+  lista.appendChild(li);
+})
+
+//no usar innerHTML
+lista.innerHTML =``;
+arrayPaises.forEach( (pais) => {
+  lista.innerHTML += `<li>${pais}</li>`;
+})
+// -----------------------------------------------------------------
+
+
+
+// -----------------------------------------------------------------
+// FRAGMENT 
+
+/*
+* new DocumentFragment()
+* createDocumentFragment()
+* Es un objeto de documento q no tiene padre.
+* es una version 'ligera' de Document q almacena un segmento de una estructura de Document
+* compuesta de nodos como un documento estandard.
+* el fragment NO forma parte de la estructura de arbol de documento activo.
+* los cambios en el fragmento son independientes al document.
+*
+*/
+console.log('--------- FRAGMENT --------- ');
+ 
+lista.innerHTML =`FRAGMENT`;  
+const lista1 = document.querySelector('#lista');
+const arrayPaises1 = ["Peru", "arg", "bolivia"];
+const fragment = document.createDocumentFragment();
+//
+arrayPaises1.forEach( (pais) => {
+  const li = document.createElement('li');
+  li.textContent = pais;
+  fragment.appendChild(li);
+  console.log(pais);
+})
+// Crear cola:
+lista1.appendChild( fragment );   // cola
+console.log( fragment );
+// -----------------------------------------------------------------
+
+
+
+// -----------------------------------------------------------------
+// CAMBIAR EL ORDEN DE LOS ITEMS
+arrayPaises1.forEach( (pais) => {
+
+  const newNode = document.createElement('li');
+  newNode.textContent = pais;
+  
+  // 1ro de la lista:
+  const referencia = fragment.firstChild ;
+  // crear Pila:
+  fragment.insertBefore( newNode, referencia );
+
+})
+//
+lista1.appendChild( fragment );
+console.log('------------ Lista invertida --------------');
+
+console.log( fragment );
+
+// -----------------------------------------------------------------
+ 
+
+// -------------------- PRACTICA ---------------------------------------------
+
+// -----------------------------------------------------------------
+/*
+<ul id="lista2">
+    {   retirar esta parte:
+    <li class="list">
+        <b>Pais:</b>
+        <span class="text-primary">aca va el pais</span>
+    </li>
+    }
+</ul>
+*/
+
+const lista2 = document.querySelector("#lista2");
+const arrayPaises2 = ["Peru", "Mexico", "Colombia"];
+const fragment2 = document.createDocumentFragment();
+//fragment2="";
+
+// 1ra FORMA : createElement('li') y fragment
+// ================================
+
+// FOREACH()
+arrayPaises2.forEach( (pais)=>{
+
+    const li = document.createElement('li');
+    li.className = 'list';
+
+    const b = document.createElement('b');
+    b.textContent = "Pais: ";
+
+    const span = document.createElement('span');
+    span.className = 'text-primary'; 
+    span.textContent = pais;
+    
+    // add clases, elemento y contenido
+    li.appendChild(b)
+    li.appendChild(span)
+    //
+    fragment2.appendChild(li);
+
+});// forEach
+
+lista2.appendChild(fragment2);
+// -----------------------------------------------------------------
+
+
+
+// -----------------------------------------------------------------
+// 2da FORMA : template e innerHTML instead framment:
+// ==================================================
+const lista3 = document.querySelector("#lista3");
+const arrayPaises3 = ["Peru", "Mexico", "Colombia"];
+//const fragment = document.createDocumentFragment();
+
+// Usar template + innerHTML
+let template ="";
+console.log('------ USANDO innerHTML ------');
+
+arrayPaises3.forEach((pais)=>{
+
+    template += `
+      <li class="list">
+        <b>Pais:</b>
+        <span class="text-primary">${pais}</span>
+      </li>   `;
+})
+
+lista3.innerHTML= template ;
+console.log( lista3.innerHTML );
+
+// -----------------------------------------------------------------
+
+
+
+
+
+// -----------------------------------------------------------------
+</script>
+</body>
+</html>

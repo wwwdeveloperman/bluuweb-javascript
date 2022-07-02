@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bootstrap Site</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+</head>
+<body>
+<h1>map, filter, find, reduce</h1>
+
+
+<script>
+
+/* 
+maps :  Itera sobre cada elemento de un array. No muta el array original
+devuelve un NUEVO ARRAY que contiene los resultados de llamar a la funcion CALL BACK en cada elemento.
+
+* CALL BACK . Es una funcion pasada a una 2da funcion como un argumento y q se invoca al llegar.
+
+* A la call  back se le pasan 3 argumentos.
+
+1. el elemento actual procesando
+2. Indice de ese elemento.
+3. el array al q se le aplicó el metodo map()
+
+
+
+
+git branch 01-array 
+*/
+
+// ===========================================================================================
+// MAP   map()
+
+/* El sgte programa busca en frutas[] el elemento "buscar"
+  primero intercambia el orden con el siguiente elemento.
+  luego   reemplaza "buscar" por "valor" .
+
+con la funcion cambio("frutilla", "FRESA")
+finalmente frutas keda cambiado aunke el array map se crea segun el
+ orden del frutas original.
+*/ 
+
+/*
+const frutas = ["banana", "manzana", "frutilla", "pera", "uva"] ;
+
+console.log('Frutas ', frutas);
+indice_buscado = null;
+cambiar = 0; // flag
+vfruta ="";
+//
+function cambio (buscar, valor) {
+
+      const mapNuevo = frutas.map(  (item, i) => {
+          console.log("cargando nuevo array de map ->", i, item );
+          
+          if (cambiar === 1 ){
+            // frutas => indice en 'buscado' =  frutas[actual] 
+            vfruta= frutas[i]
+            frutas[i]= frutas[indice_buscado]
+            frutas[indice_buscado] = vfruta
+            frutas[i]=valor
+            cambiar=2;
+          }
+          if( (frutas[i]===buscar ) && (cambiar === 0) ){
+              indice_buscado = i
+              cambiar = 1;
+          }
+
+          //return item;   // <---  ojo  No se necesita el nuevo array del map()  -> mapNuevo[]
+      })
+      
+      //console.log("Nuevo array ===>", mapNuevo);// es igual al 1er   frutas[]
+}// function cambio.
+
+console.log(  cambio("frutilla", "FRESA"));
+
+// frutas keda cambiado :
+console.log("Frutas array =>", frutas);
+// ===========================================================================================
+
+*/
+
+// ===========================================================================================
+console.log('-------- Diferencias con array --------');
+
+const Frutas = ["banana", "manzana", "frutilla", "pera"]
+const newArray = Frutas.map( (fruta) => fruta ) ;
+
+Frutas.push( "sandia" );
+console.log('Frutas.push( "sandia" )');
+
+
+console.log( "Frutas", Frutas)
+console.log("newArray map. no es referencia :", newArray);
+
+/*
+const copiaArray = Frutas ;
+
+Frutas.push("sandia"); 
+console.log( copiaArray);   //        <----- OJO se copia x referencia.
+
+
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ===========================================================================================
+</script>
+</body>
+</html>

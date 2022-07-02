@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bootstrap Site</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+</head>
+<body>
+<h1>Hello-Bootstrap</h1>
+<script>
+// web -> bluuweb
+//
+
+const gato = {
+    nombre  : "valiente",
+    duerme  : true,
+    edad    : 10,
+    enemigos: ["agua", "perros", "anim. control"],
+    otros   : { 
+      amigos    : ["cobarde", "timido"],
+      favoritos : {
+          comida  : {
+            frio    : "salmon",
+            caliente: "pollo" 
+          }       // comidas
+      }// favoritos
+    }// otros
+}// gato
+//
+
+console.log( 'gato.nombre :', gato.nombre );
+console.log( 'gato["nombre"] :', gato["nombre"] );
+console.log( 'gato.duerme :', gato.duerme );
+console.log( 'gato[ "enemigos"][0] :', gato[ "enemigos"][0]);
+console.log( 'gato.enemigos[0] :', gato.enemigos[0]);
+
+// CRUD
+// ------------------------------
+
+gato.color = "blanco"; // create
+
+console.log( gato );  // read
+
+gato.edad = 11;       // update
+
+delete gato.duerme    // delete
+
+console.log("objeto->", gato );
+
+console.log("edad:", gato.hasOwnProperty("edad"));
+console.log("duerme:", gato.hasOwnProperty("duerme"));
+
+// OBJETOS ANIDADOS
+
+console.log( 'gato.otros.favoritos.comida.frio->', gato.otros.favoritos.comida.frio );
+console.log( 'amigos[1]', gato.otros.amigos[1]);
+console.log( 'gato.otros.amigos', gato.otros.amigos);
+//console.log( 'gato.otros.favoritos.comida.frio->', gato.otros.favorito?.comida.frio );
+
+
+// -------------------------------------------
+const nombre ="scope general";
+const gato1 = {
+    nombre  : "valiente",
+    duerme  : true,
+    edad    : 10,
+    enemigos: ["agua", "perros", "anim. control"],
+    comer   : function(){
+      console.log('comer() -> gato1 comiendo');
+    },
+    comer2(alimento){
+      console.log(`comer2()->${this.nombre} come ${alimento}`);
+      console.log( nombre );          // "scope general"
+      console.log( gato1.nombre );    // "valiente"
+    },
+    
+    // Error ojo.   no this dentro de ()=>
+    correr: (min)=>{
+        console.log( `correr()-> ${this.nombre}` + ` corre ` + min + ` minutos` );
+    },
+
+    listarenemigos(){
+      console.log('---- For each ----------');
+      
+      this.enemigos.forEach(  (item)=> {
+        console.log(item);
+      })
+    }// listarenemigos
+
+  }; // gato1
+  console.log('===================================');
+  
+  gato1.comer();    //    gato 1               <=== OJO
+  gato1.comer2("balanceado.");
+  
+
+  // *********** FUNCIONES FLECHA  ()=>
+  // Funciones Flecha :
+  // No argumentos, ni palabras clave new.target
+  // no call, apply y bind  debido a su scope
+  // no constructor
+  // no yield .   
+  // no  this.
+  // no usar arrow functions ()=> como metodos pero SI
+  // en su interior.
+  gato1.correr(5);    // OJO   Error con this.
+
+  
+  
+  //*********  USO DE forEach()
+  gato1.listarenemigos();
+
+
+
+
+  // *********  for(    in    )
+  const gato2 ={              //  <--- OJO gato2
+      nombre    : "valiente",
+      duerme: true,
+      edad: 10,
+      enemigos  : ["agua", "perros", "animal control"]
+  }//
+  console.log('-------  for(  in   ) --------' );
+  
+  console.log('--propiedades--');
+    for( const item in gato2) {
+    console.log( item);           //
+  }
+  
+  console.log('--Values --');
+  for( const item in gato2 ) {
+    console.log( gato2[item]);    // valores
+    //           gato2.algo     Error
+  }
+
+  console.log("--- Object.values() ------");
+    console.log( Object.values(gato2) );
+  
+  
+  console.log('---- ob.val().forEach( item )=>');
+    Object.values(gato2).forEach(  (item)=>{
+    console.log( item );
+  })
+
+x=  `
+  ---- ob.val().forEach( item )=>
+ valiente
+ true
+ 10
+
+ (3)  ['agua', 'perros', 'animal control']
+ 0: "agua"
+ 1: "perros"
+ 2: "animal control"length: 
+ 3[[Prototype]]: Array(0)
+`
+
+
+// -------------------------------------------
+
+
+// -------------------------------------------
+// -------------------------------------------
+// -------------------------------------------
+// -------------------------------------------
+// -------------------------------------------
+
+
+
+
+
+</script>
+</body>
+</html>

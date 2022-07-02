@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bootstrap Site</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <h1>El mejor Template </h1>
+    
+    <ul id="lista"> </ul>
+    
+    <ul id="lista1"> </ul>
+
+    <!-- template NO se renderiza, es p programacion -->
+    <template id="liTemplate">
+      
+        <li class="list">
+            <b>Pais:</b>
+            <span class="text-primary">el pais</span>
+        </li>
+      
+    </template>
+
+<script>
+// -----------------------------------------------------------------
+// 3ra. FORMA : template y clone.   (la mejor opcion)
+// ==================================================
+const lista = document.querySelector("#lista");
+//const arrayPaises = ["Peru", "Mexico", "Colombia"];
+//const fragment = document.createDocumentFragment();
+
+// Select el id del template y ponerlo en una 1ra const:
+const liTemplate = document.querySelector('#liTemplate');
+// clonar la const y poner en 2da const clone.
+const clone = liTemplate.content.cloneNode( true );
+// modificar el content del clone 
+clone.querySelector(".text-primary").textContent = "adding here" ;
+//console.log( clone );
+// add clone a la lista principal (ul)
+lista.appendChild( clone ) ;
+// -----------------------------------------------------------------
+
+
+// -----------------------------------------------------------------
+// 
+const arr_paises = ["Peru", "Argentina", "Colombia"];
+
+// crear const0 con la tag lista1 de (ul) 
+const lista1 = document.querySelector("#lista1");
+// crear fragment
+const fragment = document.createDocumentFragment();
+// // etiketa <template id="idTemplate">
+const liTemplate1 = document.querySelector("#liTemplate") 
+// rekiere ".firstElementChild"
+const clkPais = (e)=> console.log( "clicking", e.target );
+//
+arr_paises.forEach( (pais)=>{
+    //
+    //const clone = liTemplate.content.cloneNode(true);
+    const clone = 
+    liTemplate.content.firstElementChild.cloneNode(true);       //                  <-------- OJO
+    clone.querySelector("span").textContent = pais;
+    // ============================================
+    //*** OJO ->  clkPais() se ejecuta.            <===============    ojo
+    clone.addEventListener("click", clkPais);
+    fragment.appendChild( clone );
+});
+console.log('-------- con clone y fragment ---------');
+
+lista1.appendChild(fragment);
+
+// -----------------------------------------------------------------
+
+
+/*
+bluugithub guia:
+
+El template no se renderiza.
+template: es un mecanismo para mantener el contenido HTML del lado del cliente
+ke NO se renderiza cuando se carga una pagina pero q posteriormte puede ser 
+instanciado durante el tiempo de ejecucion empleando javascript
+
+Piensa en la plantilla como un fragmento de contenido que esta siendo almacenado
+para un uso posterior en el documento.
+
+El analizador procesa el contenido del elemento <template> durante la carga
+de la pagina pero solo lo hace para asegurar ke esos contenidos son validos, sin 
+embargo, estos contenidos del elemento no se renderizan.
+
+los elementos <template> contienen un DocumentFragment en su propiedad
+"HTMLTemplateElement.content"
+
+
+*el <template> debe estar ubicado en el <body>
+
+*/
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

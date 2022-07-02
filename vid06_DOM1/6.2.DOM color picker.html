@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bootstrap Site</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+
+
+<div class="container m-3 p-2 text-center row border
+  justify-content-center">
+
+      <!--<div class="col-2 border">
+      </div>-->
+      <div class="col-12 col-md-6  border justify-content-center">
+
+          <label for="inputColor" class="form-label">Color Picker</label>
+          
+          <input type="color" 
+          class="form-control form-control-color w-50 border
+                  justify-content-center" 
+          id="inputColor" value="#0a0000;" 
+          title="Choose your color" >
+          <!--*-->
+          <div class="mt-3">
+              <button class="btn btn-primary w-50" 
+              id="btnVisualizar"> Visualizar</button>
+
+              <p class="lead mt-3 text-primary text-primary"
+               id="parrafoExa">#0a0000;</p>
+              
+              <div id="cardColor" class="card p-5"
+              style="background-color:#0a0000;"></div>
+
+          </div>
+
+      </div>
+  
+</div>
+
+
+
+<script>
+
+const inputColor = document.querySelector('#inputColor');
+const btnVisualizar = document.querySelector('#btnVisualizar');
+const parrafoExa = document.querySelector('#parrafoExa');
+const cardColor = document.querySelector('#cardColor');
+
+// PROBAR OBJETOS:
+/*
+console.log(inputColor);
+console.log(btnVisualizar);
+console.log(parrafoExa);
+console.log(cardColor);
+*/
+
+console.log( inputColor.value);
+
+btnVisualizar.addEventListener("click", ()=>{ 
+
+    //console.log('click ...');
+    //console.log(inputColor.value);
+
+    parrafoExa.textContent = inputColor.value;
+    cardColor.style.backgroundColor = inputColor.value;
+    
+    // CLIPBOARD:
+    navigator.clipboard
+      .writeText( inputColor.value)
+      .then( () => console.log('texto copiado'))
+      .catch( (e) => console.log(e) );
+      
+});
+
+
+
+
+
+
+
+
+</script>  
+</body>
+</html>

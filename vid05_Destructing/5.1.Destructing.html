@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bootstrap Site</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+</head>
+<body>
+<h1>DESTRUCTURACION {} </h1>
+
+<script>
+
+// DES ESTRUCTURAR
+const gato = {
+  nombre : "valiente",
+  //duerme: true,
+  edad: 10,
+  enemigos: ["agua","perros", "animal-control"],
+}
+
+const edad = 20;
+const nomgato = gato.nombre ; // OBSOLETO
+
+let x = { 
+  enemigos : []
+}
+
+// ALIAS y DEFAULT VALUE
+const { nombre, duerme=true, edad:anios, enemigos  } = gato;
+
+console.log("datos->", nombre, duerme, edad, enemigos);
+
+x.enemigos= enemigos ;
+console.log("Objeto x ->",x.enemigos);
+
+// --------------------------------------
+
+const gato1 = {
+  nombre : "valiente",
+  //duerme: true,
+  edad: 10,
+  enemigos: ["agua","perros", "animal-control"],
+  otros:{
+    amigos:["cobarde", "timido", "pegajoso"],
+    favoritos:{
+      comida:{
+        fria: "salmon",
+        caliente: "pollo",
+      },
+    },
+  },
+};
+
+console.log('====== gato1 ========');
+
+//const {  amigos: amiGatos } = gato1.otros;
+//console.log(amiGatos);
+// o bien:
+const {  amigos, favoritos:comida } = gato1.otros;
+console.log("Amigos->", amigos);
+console.log("Comida->", comida);
+//
+// ANIDADOS:
+const { amigos:amArray } = gato1.otros;
+const [ amigo1, amigo2, amigo3, amigo4="'no hay'"] = amArray;
+
+console.log('------ amigos array ----------');
+console.log('arr entero--->',amArray);
+console.log('amigos-->', amigo1, amigo2, amigo3, amigo4);
+
+
+//********  CON METODOS: ----------------------------
+// NO SE PUEDE DESTRUCTURAR METODOS CON this:
+//
+const gato2 = {
+  nombre : "valiente",
+  //duerme: true,
+  edad: 10,
+  enemigos: ["agua","perros", "animal-control"],
+  otros:{
+    amigos:["cobarde", "timido", "pegajoso"],
+    favoritos:{
+      comida:{
+        fria: "salmon",
+        caliente: "pollo",
+      },
+    },
+  },
+  comer( comida ) {
+      return `${this.nombre} esta comiendo ${comida}`;
+  },
+  comer3: function( comida){
+      return `${this.nombre} esta comiendo ${comida}`;
+  },
+  mostrarEnemigos(){
+    return this.enemigos.forEach( (item)  => {
+      console.log( item );
+    })
+  },
+  get nom_mayusculas() {
+    return this.nombre.toUpperCase();
+  },
+  set agregarEnemigo( newguy ){
+    this.enemigos.push(newguy);
+  }
+
+};
+console.log('-------- METODO comer() -----------');
+const comer = gato2.comer();
+console.log( gato2.comer("carne") );
+
+// *** NO se podria debido al 'this' esto :      OJO
+
+//const {comer2} = gato2
+//console.log( comer('pez'));  // error
+
+const comer3 = gato2.comer3("pez");
+console.log(comer3);
+
+
+// **************  GETERS   Y SET ers ******************
+// get() :  no tiene parametros
+// set() :  no tiene mas de 1 parametro.
+console.log('--------- Get() ---------------');
+console.log(gato2.nom_mayusculas);
+
+
+console.log('---------- Set() --------------------');
+gato2.agregarEnemigo = "payasos"
+console.log( gato2.enemigos );
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

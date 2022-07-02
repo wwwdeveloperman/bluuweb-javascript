@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bootstrap Site</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+</head>
+<body>
+<h1>Hello-Bootstrap</h1>
+<script>
+// web -> bluuweb
+// video 04. var vs Let
+
+// -------------------------------------------
+// INTERPOLACION
+var x= 4;
+  console.log(`${x} texto`);
+  
+// -------------------------------------------
+
+// -------------------------------------------
+var vnombre = "ana"
+var vnombre = "lisa"
+
+console.log(vnombre); // lisa
+// -------------------------------------------
+// -------------------------------------------
+let vnom = "ana"
+//let vnom = "lisa"    // error duplicada
+
+vnom = "lisa" ;        // is ok
+
+console.log(vnom);     // lisa
+// -------------------------------------------
+
+
+// -------------------------------------------
+// var.   obsoleto.  NO RESPETA SCOPE
+// 
+console.log("------------------------------------");
+var estado = true;
+console.log( "var: estado en 1er ambito.",estado );
+
+if(estado) {
+  var estado = false;
+  console.log("var: Dentro de if cambia", estado); // false
+}
+console.log("var: 1er ambito de nuevo ", estado);  // false
+// -------------------------------------------
+
+
+// -------------------------------------------
+console.log("------------------------------------");
+let estado2 = true;
+console.log( "Let. estado en 1er ambito.",estado2 );
+
+if( estado2 ) {
+  let estado2 = false;
+  console.log("Let. Otra var 'estado' ", estado2); // false
+}
+console.log("let.1er ambito de nuevo ", estado2);  // false
+// -------------------------------------------
+
+
+
+// -------------------------------------------
+// CONSTANTES   const
+// const RESPETA EL SCOPE
+console.log("----------------------------------");
+
+const estado3 = true;  
+
+if(estado3){
+    const estado3 = false
+    console.log( "const dentro del if---> estado3" );     // false
+}
+console.log("const en ambito principal--->", estado3 );        // true
+// -------------------------------------------
+
+
+
+
+// -------------------------------------------
+// EN LOS OBJETOS const  solo evita repetir una declaracion del mismo objeto.
+// pero se puede alterar el objeto.
+console.log("----------------------------------");
+
+// DECLARACION
+const miArray1 =[];
+
+// NO MODIFICAR LA DEFINICION:
+// miArray1 = ["sandia", "palta"]; // Error
+
+// USAR EL INDICE:
+miArray1[0]=["sandia"];
+console.log("miArray1 sandia->", miArray1);     // ===>
+
+
+
+// O DESDE EL INICIO LA DEFINICION:
+miarray2 =  [ "palta", "naranja", "banana"];
+console.log("miarray 2 -->",miarray2);
+
+
+// METODO push() add al final:
+miArray3=[];
+
+miArray3.push("naranja");
+miArray3.push("anana");
+console.log("miArray3 push() final -->", miArray3);     // ===> 
+
+// unshift() add al inicio.
+miArray3.unshift("pera");
+console.log("miArray3 unshift() al inicio-->", miArray3);     // ===> 
+
+miArray3.push("ultimo");
+console.log("miArray3 push()-->", miArray3 );     // ===> 
+
+miArray3.pop();
+console.log("miArray3.pop()", miArray3 );
+
+
+// -------------------------------------------
+console.log('==============================================');
+
+
+const frutas =[];
+let item ='';
+do{
+  item = prompt("Fruta o  q=Salir->");
+  if( item.trim() === 'q'){
+    break ;
+  }
+  frutas.push(item);
+} while(1) // item.trim() !== 'q'
+
+
+for ( const elem of frutas){
+  console.log(elem);
+}
+
+
+</script>
+</body>
+</html>

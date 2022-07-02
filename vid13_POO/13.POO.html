@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS v5.2.0-beta1 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"  integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    
+    <!-- Bootstrap JavaScript Libraries -->
+    <script defer src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
+
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
+
+  </head>
+  <body>
+    <h2>   POO</h2>
+    <script>
+      // al usar class hay una VENTAJA:
+      // los metodos se crean en el prototype y no
+      // dentro de la clase. aunq se escribe dentro.
+      // mirar en la consola al correr el codidgo.
+      class Persona {
+          //
+          constructor( nombre) {
+            this.nombre = nombre ;
+          }
+          // ------------------------
+          get getNombre(){
+            return this.nombre;
+          }
+          set setNombre( nombre ){
+            this.nombre = nombre ;
+          }
+          // ------------------------
+          saludar1() {
+            return `${this.nombre} dice hola` ;
+          }
+
+          static probarSaludo(nombre){
+            //return `hola->${nombre}`;
+            console.log(`hola ${nombre}, static`);
+          }
+
+      }// class
+
+      const juanito = new Persona("juanito");
+      // Observar q dentro de la clase ya no esta la
+      // funcion saludar1. sino en el Prototype.
+      console.log(juanito);
+      console.log(juanito.saludar1());
+
+
+      // ***** OJO
+      // SET Y GET  propiedades :
+      //juanito.nombre = "JuanPedro";  // nunca
+      juanito.setNombre = "Juan Pedro";
+      console.log(juanito.getNombre);
+      console.log( juanito.saludar1());
+
+
+
+      // USO DE STATIC
+      console.log( Persona.probarSaludo("marcos") );
+      //
+      // NO ES STATIC,  DA ERROR 
+      // SOLO LLAMAR CON UN OBJETO COMO juanito.
+      //console.log( Persona.saludar1() ); // Err
+      //
+
+
+
+      // HERENCIA con    "extends"
+
+      class Estudiante extends Persona{
+        //#notas =[]; // clog.(juanito.#notas)
+
+        constructor(nombre, edad, notas=[]) {
+          super(nombre, edad);
+          this.notas = notas ;
+        }
+
+        // ----------------------------------
+        set setNotas(n) {
+          this.notas.push(n);
+        }
+
+        get getNotas(){
+          return this.notas ;
+        }
+        // ----------------------------------
+
+        // sobreescribir (polimorfismo)
+        saludar(){
+          return `${this.nombre} desde Estud` ;
+        }   
+
+      }// Estudiante
+
+      // USAR CLASE EXTENDED      
+      const juanito2 = 
+      new Estudiante("juanito2", 25 );
+
+      juanito2.setNotas = 7;
+      juanito2.setNotas = 5;
+      juanito2.setNotas = 1;
+
+      console.log(juanito2.getNotas);
+      
+      console.log(juanito2.saludar());
+      
+      
+
+
+
+      // DATOS PRIVADOS:
+      class Estudiante2 extends Persona{
+        #notas =[];  // clog.(juanito.#notas)
+
+        // ya no se ocupa.
+        //constructor(nombre, edad) {
+        //  super(nombre, edad);
+        //  this.notas = notas ;
+        //}
+
+        // ----------------------------------
+        set setNotas(n) {
+          this.#notas.push(n);
+        }
+
+        get getNotas(){
+          return this.#notas ;
+        }
+        // ----------------------------------
+
+      }// Estudiante
+
+
+      const Pepe = new Estudiante("Pepe", 20);
+      Pepe.setNotas = 8
+      Pepe.setNotas = 7
+      Pepe.setNotas = 9
+      console.log('---------------------------');
+      console.log(`Notas de Pepe`, Pepe.getNotas);
+      
+
+    </script>  
+  </body>
+</html>

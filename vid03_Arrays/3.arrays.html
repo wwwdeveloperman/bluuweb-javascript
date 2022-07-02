@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bootstrap Site</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+</head>
+<body>
+<h1>Hello-Bootstrap</h1>
+<script>
+// web -> bluuweb
+// video 03. arrays
+
+let frutas = ["platano","manzana", "grey", "durazno"] ;
+console.log("array->", frutas);
+console.log("size->", frutas.length);
+
+
+// -------------------------------------------
+//ITERADORES:
+console.log(`\n Array frutas :\n`);
+
+for( let i=0; i<frutas.length; i++){
+  console.log(`array ${i}->  ${frutas[i]}` );
+}
+// -------------------------------------------
+
+
+
+// -------------------------------------------
+// OTRO    for   of
+console.log(`\n`);
+
+for ( let elem of frutas ) {
+  console.log( elem );
+  
+}
+/*
+frutas[Symbol.iterator]
+ƒ values() { [native code] }  
+*/
+// -------------------------------------------
+
+
+// OTRO ---------------------------------------
+
+let nombreUsuario = "ignacio";
+
+for( let char of nombreUsuario ){
+  console.log(char);
+}
+/*
+nombreUsuario[Symbol.iterator]
+ƒ [Symbol.iterator]() { [native code] }
+*/
+// -------------------------------------------
+
+
+
+// -------------------------------------------
+function sumar(n1, n2){
+  return parseInt(n1) + parseInt(n2) ;
+}
+let num1 = prompt("nro 1->");
+let num2 = prompt("nro 2->");
+
+console.log( sumar( num1, num2) );
+
+
+
+
+// -------------------------------------------
+
+
+
+
+
+</script>
+</body>
+</html>
