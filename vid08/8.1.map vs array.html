@@ -39,89 +39,89 @@ console.log( copiaArray);   //        <----- OJO se copia x referencia.
 */
 
 // ---------------------------------------------------------------------------------------
-/*
-let user = {
-  name: "John",
-  age: 30
-};
+console.log('\n 0. ======== ARRAY DE OBJETOS  ===========');
+
+const usr = [
+    { name : "john", age: 10 },
+    { name : "Amy", age: 14 },
+    { name : "Cat", age: 24 },
+    { name : "lisa", age: 30 }
+]
 
 // recorrer claves-y-valores
-for (let [key, value] of Object.entries(user)) {
-  alert(`${key}:${value}`); // name:John, luego age:30
-}
-*/
+for( let i=0 ; i< usr.length ; i++){
+
+    //console.log('\t\t',  usr[i].name,  usr[i].age );
+    console.log(`----- ${i} -----`);
+    for (let [key, value] of Object.entries(usr[i])) {                        // ***** OJO
+      console.log(`${key}:${value}`);                   // name:John, luego age:30
+    }
+
+}//
+
 // ---------------------------------------------------------------------------------------
 
 
 
 // ========== DES ESTRUCTURACION ===================================
-
-// tenemos : 
-console.log('================= array users =============');
-
+// tenemos un array users : 
+// con un for() conseguimos listar 2 propiedades.
+console.log('\n =============== DE SES TRUC TU RA CION {} =============');
 const users = [
-    { name : "john", age: 04},
-    { name : "Amy", age: 14},
-    { name : "camperCat", age: 24}
+    { name : "john", age: 10 },
+    { name : "Amy", age: 14 },
+    { name : "Cat", age: 24 },
+    { name : "lisa", age: 30 }
 ]
-console.log( 'array users ->', users);
+console.log( '1.array users ->', users);         
 
-console.log('------- mapear users ---------');
+console.log('\n2.=== CLAVE-VALOR ====  array users con for(users) ====');                 //
+for( let i=0 ; i< users.length ; i++){
+
+    console.log('\t\t',  users[i].name,  users[i].age );
+}//
 
 
-const names = users.map( (user)=> {
-  console.log( user.name )
-  return user.name                                    // return indispensable.
+
+//---------------------------------------------------------------------------------
+// Ahora des estructurando listamos en el mapeo con item.name...
+// 
+console.log('\n ------- mapear users ---------');                      //
+console.log('3.    na=[{names, age}] = users.map( (user)=> {');           //
+// map():
+const na=[{name, age}] = users.map( (item)=> {
+  
+  console.log( item.name, item.age )                                //
+  return ( item );                  // carga na con solo "item" .  return indispensable.
 });
+//console.log('5.array names', na );
 
-console.log('devuelve names:');
+//------------------------------------------------------------------------
+// y con la orden for() seria   na[i].name
+console.log('\n4.=== CLAVE-VALOR array -> na ====        con for( na)  =======');                 //
+console.log('-------- valor procesado. +2 ');
 
-console.log( names );
+for( let i=0 ; i< na.length ; i++){
 
+    console.log('\t\t',  na[i].name, '\t\t', na[i].age+2  );
+
+}//
+
+/*
+La des estructuracion al momento y scope del map() parece bienvenida por q cumple con su
+proposito de ayudar en la simplificacion del codigo. console.log( item.name, item.age )   se ve
+simple
+
+pero al escanear el array resultante na con un for() no hay como evitar el acceso a un 
+array y su indice entre corchetes. na[i].name    se pierde la ventaja de la desestructuracion.
+Resulta igual que escanear el array user con un for()  users[i].name
+
+El mapeo resulta util para algunas cosas como un filtrado. y con la desestr... parece ke 
+se puede tener una sintaxis mas clara. ( item.name )
+
+*/
+// 😃
 // ----------------------------------------------------------------------------------
-console.log(' ---------- destructuring ------------');
-
-const x= [{name: a, age: b }] = users.map( u => {
-
-    return( u ) ;
-});
-
-//const { nombre, age } = x            //  x <--[ {name:"john", age:04}, {}, {} ]
-console.log("arr del map ->  ", x  );
-
-console.log( a, b);
-
-
-
-
-
-
-
-
-
-
-
-
-
-// ---------------------------------------------------------------------------------------
-
-
-// ---------------------------------------------------------------------------------------
-
-
-
-// ---------------------------------------------------------------------------------------
-// ---------------------------------------------------------------------------------------
-
-
-
-
-
-
-
-
-
-
 
 
 // ===========================================================================================

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bootstrap Site</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+</head>
+<body>
+<h1>Filtros</h1>
+
+
+
+<script>
+
+const users = [
+
+    { uid: 1, name: "John", age: 34 },
+    { uid: 2, name: "Amy", age: 21 },
+    { uid: 3, name: "campero", age: 10 },
+    { uid: 3, name: "carlos", age: 15 },
+    { uid: 4, name: "Beto", age: 40 },
+    { uid: 5, name: "chela", age: 50 }
+];
+console.log('0. ========= array original users =============');
+
+console.log( users );
+
+// ----------- FILTRAR -------------------
+const may = [{uid: id, name: na, age: ag }] = users.filter( (u)  => {
+
+      return( u.age >= 20 ) ;
+});
+/*
+const mayores = users.filter( (user) => {
+      return user.age >= 20;
+}); */
+console.log('1. ----- array filtrado --------- users.filter');
+
+console.log( may);                                            //
+
+
+
+console.log('2. UID-Name-Age ================= LISTADO  con for()  =======');                 //
+for( let i=0 ; i< may.length ; i++){
+
+    console.log( may[i].uid, may[i].name,  may[i].age  );
+
+}//
+ 
+
+console.log('3. -------------- LISTADO con map() Y FILTRADO -------------------');
+
+const  res = [ { id, name, age } ]  =  may.map( (item) => {
+
+     console.log( item.uid, item.name, item.age );
+     if (item.age <= 40 ){
+        return item;
+     }
+     
+});
+console.log('4. ------  ARR MAPEAD Y FILTRADO NUEVAMENTE ---------');
+//
+console.log( res );
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+body>
+</html>
