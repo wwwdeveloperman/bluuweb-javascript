@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bootstrap Site</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+</head>
+
+<body>
+<h1>Find</h1>
+
+
+<script>
+
+const users = [
+    { uid: 1, name: "John", age: 34 },
+    { uid: 2, name: "Amy", age: 21 },
+    { uid: 3, name: "campero", age: 10 },
+    { uid: 4, name: "carlos", age: 15 },
+    { uid: 5, name: "Beto", age: 40 },
+    { uid: 6, name: "chela", age: 50 }
+];
+
+// FORMA 1 METODO find :
+// dev el 1er elem q contenga el valor buscado
+console.log('\n1. ======================= find() =======================');
+let vFound = users.find(  (u) =>u.uid === 2);
+console.log( vFound );
+vFound = users.find(  (u) =>u.uid === 20);
+console.log('meth. find:', vFound );
+// ============================================================================
+
+
+
+
+
+// ============================================================================
+
+// FORMA 2 METODO some 
+console.log('\n2. ======================= some() =======================');
+let vfound = users.some( (u) => u.uid === 2 );
+console.log( vfound );
+ vfound = users.some( (u) => u.uid === 20 );
+console.log( vfound );
+// ============================================================================
+
+
+
+
+
+// ============================================================================
+
+//FORMA 3
+console.log('\n3. ======================= findIndex() =======================');
+//devuelve -> 2. Si no existe -> -1
+//si existiera en otra posicion del array otro 3, sigue devolviendo 2.
+let vIndex = users.findIndex( (u)=>u.uid == 3);
+console.log( vIndex );
+
+vIndex = users.findIndex( (u)=>u.uid == 30);
+console.log( vIndex );
+// ============================================================================
+
+
+
+
+
+// ============================================================================
+
+//METODO  slice : devuelve una copia de parte de un array .
+// desde Inicio hasta Fin ( no incluido)
+console.log('\n4. ======================= slice() =======================');
+const arr1 = ["cat", "Dog", "Tigre", "Zebra","mono", "loro", "iguana"];
+console.log('array ->', arr1);
+
+const newArray = arr1.slice(1,3) // 3 NO INCLUIDO
+console.log( 'sacar desde 1 hasta 3 (no incluido)', newArray);
+
+const newArray2 = arr1.slice(5,7) // 3 NO INCLUIDO
+console.log('sacar desde 5 hasta 7 (no incluido)', newArray2);
+// ----------- copiar con slice() --------------------
+{
+      
+    const arr1 =  ['a','b','c']
+
+    //newArray = arr1.slice(1,3) 
+
+    let arr2 = arr1.slice( 0, 100 )
+    console.log('copia->', arr2 )
+
+}
+// ============================================================================
+
+
+
+
+
+
+// ============================================================================
+
+// METODO concat()
+console.log('\n5.======================= concat() =======================');
+/* concat() se usa para unir 2 o mas arrays. no cambia los arrays existentes sino q
+crea uno nuevo.
+*/
+{
+    const arr1 =  ['a','b','c']
+    const arr2 =  ['d','e','f']
+
+    const arr_retorno = arr1.concat( arr2 )
+    console.log( arr_retorno)
+}
+// ------------- copiar con concat() -----------------
+{
+  console.log('\n----------- copiar con concat ---------');
+    
+    const arr1 = ['a','b','c'];
+    let arr2= [] ;
+
+    arr2 = arr2.concat( arr1)
+    console.log('SIN un 3er array ', arr2);
+
+}
+// ============================================================================
+
+
+
+
+
+// ============================================================================
+
+// ============== spread operator =======================
+console.log('\n6. ============ Concatenacion con  spread operator ================');
+
+{
+  const arr1 = ['a','b','c']
+  const arr2 = ['d','e','f']
+
+  const arr3 = [...arr1,"---", ...arr2]
+
+  console.log('spread en arr3:', arr3 );
+
+}
+// ============================================================================
+
+
+
+
+
+// ============================================================================
+
+// METODO reduce :
+// Ejecuta una funcion reductora sobre cada elemento.
+// devuelve un unico valor.
+
+console.log('\n7. ======================= reduce(acc, item) ======================');
+
+const numeros =[1,2,3,4,5];
+
+const total = numeros.reduce( (acc, item) => acc+ item );
+
+console.log( 'reduce suma valores del arr ->', total );
+
+//=====
+
+
+
+console.log('\n8.--------- reduce Concatena arrays ---------');
+
+const arrarr = [ 
+    [1,2],
+    [3,4],
+    [5,6]
+];
+
+
+{
+  const nros = arrarr.reduce( 
+    (acc, item) => acc.concat( item )
+  )
+
+  console.log('reduce y concat() ---> ', nros ); // (6) [1, 2, 3, 4, 5, 6]
+}
+
+
+// ------- hecho de otra manera ----------------------------------------- 
+//  spread operator
+{ 
+  const arrfinal = [].concat( ...arrarr);
+
+  console.log('\n9.------- concatenacion con spread -------------------------');
+  console.log('-------- .concat(...array ) --------- igual q con reduce --------------------');
+
+  console.log( arrfinal );
+}
+  // ========================================================================================
+
+
+
+
+// ========================================================================================
+// vid 8 min:1.26
+//***** METODO flat():             OJO *****   etapa experimental. ver mdn.org
+
+const arrayPlano = arrarr.flat();
+
+console.log('\n10  ===================== flat() ===========================');
+
+console.log( 'arrarr.flat()', arrayPlano );
+
+// -------
+
+{
+  const nros = [1, 2,[ 3, 4, [5, 6] ] ];
+
+  const nrosPlanos = nros.flat(2);              // <==== OJO Pendiente el 2
+
+  console.log('\n11.--------- flat() -------------------');
+  
+  console.log('array :[1, 2, [34, [5, 6]] ] a nros.flat()==>', nrosPlanos );
+  
+}
+// ======================================================================================
+
+
+
+
+// ============================================================================
+// ----------------------  METODO    split() ---------------------------
+// split() : divide un objeto de tipo string en un array mediante un separador.
+{
+    // string:
+    const cadenasMeses = "Jan, Feb, Mar, Abr, May, Jun, Jul, Ago, Sep, Oct, Nov, Dic";
+    //array:
+    const arrMeses = cadenasMeses.split(',');
+
+    console.log("\n12. ========================= array con split() =========================")
+    console.log('creando de string a array con split()', arrMeses);
+
+   console.log('------------------ De array a texto --------------------');
+    const nuevoTexto = arrMeses.join(",");
+    console.log('de Array -> Texto :', nuevoTexto);
+}
+
+// ------------------------------------------------------------------------------
+// ==============================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>
