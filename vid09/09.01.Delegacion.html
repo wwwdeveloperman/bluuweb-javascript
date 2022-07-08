@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bootstrap Site</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+</head>
+<body>
+<h1>Delegacion</h1>
+
+<div class="container">
+  <div  id="padre" class="border border-primary border-5 py-5 m-3"
+        data-div="divPadre">
+    lorem ipsum padre
+
+    <div id="hijo" class="border border-secondary border-5 py-5 m-3"
+         data-div="divHijo">>
+      lorem ipsum hijo
+
+      <div id="nieto" class = "border border-danger border-5 py-5 m-3"
+           data-div="divNieto">>
+        lorem ipsum nieto
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<form>
+  <input type="text" name="nombre">
+  <button type="submit">Enviar</button>
+</form>
+
+<script>
+/*
+getElementById o querySelector().   da lo mismo. luego pasa por Babel y al
+final termina como sea.
+OJO
+*/
+
+
+/*
+const padre = document.querySelector('.border-primary')
+const hijo  = document.querySelector('.border-secondary')
+const nieto = document.querySelector('.border-danger')
+
+
+padre.addEventListener('click', (e)=>{
+  console.log('padre:  click'+ e);
+}, true)
+
+hijo.addEventListener('click', (e)=>{
+  console.log('hijo:  click'+ e);
+}, true)
+
+nieto.addEventListener('click', (e)=>{
+  console.log('nieto:  click'+ e);
+}, true)
+
+*/
+
+/*
+const cajas = document.querySelectorAll(".container div");
+cajas.forEach((item) => {
+    item.addEventListener("click", (e) => {
+        e.stopPropagation();
+        console.log("click"+ e);
+    });
+}); */
+
+/*const formulario = document.querySelector("form");
+//
+
+
+formulario.addEventListener("submit", (e) => {
+    // detiene como midleware el comportam. default, enviar form data.
+    e.preventDefault();
+    console.log("click");
+
+});
+*/
+
+// USAR AddEventListener:
+
+const container = document.querySelector(".container");
+
+container.addEventListener("click", (e) => {
+  //console.log( e.target.id );
+  /*
+  // OPCION 1.
+  if( e.target.id === "padre"){
+    console.log( "Padre: clic")
+  }
+  
+  // OPCION 2.
+  console.log( e.target.matches(".border-secondary"));// true/false
+  
+  // OPCION 3:
+  if( e.target.matches(".border-secondary")){
+    console.log( ".border-secondary :  clicking.");
+  }*/
+
+  // OPCION 4: --------------------------------------
+  console.log( e.target.dataset.div);
+  // en el html ->      data-div="divNieto">>
+  if( e.target.dataset.div === "divPadre" ) {
+      console.log( "divPadre:   clicking");
+  }
+
+  if( e.target.dataset.div === "divHijo" ) {
+      console.log( "divHijo:   clicking");
+  }
+
+  if( e.target.dataset.div === "divNieto" ) {
+      console.log( "divNieto:   clicking");
+  }
+
+
+})// container
+  
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+</body>
+</html>

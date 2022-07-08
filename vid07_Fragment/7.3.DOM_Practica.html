@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bootstrap Site</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap Site</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
 </head>
 
 <body>
-  <h2 class="text-center">carrito </h2>
+  <h2 class="text-center">Carrito Reyes Leiva </h2>
 
 
 <!-- ----------------------------------------------- -->
@@ -20,10 +20,12 @@
       <article class="col-sm-4 mb-3">
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title">frutilla</h5>
+            <h5 class="card-title">frutilla 🍓</h5>
+            <p class="lead"> $300</p>
             <button class="btn  btn-outline-primary"
-                    data-fruta="frutilla" >
-                    Add
+                    data-fruta="frutilla 🍓"
+                    data-precio="300" >
+                    Agregar
             </button>
           </div>
         </div>
@@ -33,10 +35,12 @@
       <article class="col-sm-4 mb-3">
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title">Banana</h5>
+            <h5 class="card-title">Banana 🍌</h5>
+            <p class="lead"> $100</p>
             <button class="btn btn-outline-primary"
-                    data-fruta="banana" >
-                    Add
+                    data-fruta="banana 🍌" 
+                    data-precio="100" >
+                    Agregar
             </button>
           </div>
         </div>
@@ -46,10 +50,12 @@
       <article class="col-sm-4 mb-3">
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title">Manzana</h5>
+            <h5 class="card-title">Manzana 🍎</h5>
+            <p class="lead"> $200</p>
             <button class="btn btn-outline-primary"
-                    data-fruta="manzana">
-                    Add
+                    data-fruta="manzana 🍎"
+                    data-precio="300" >
+                    Agregar
             </button>
           </div>
         </div>
@@ -65,32 +71,78 @@
   <!-- ----------------------------------------------- -->
   <section class="container mt-3">
     <ul class="list-group" id="carrito">
-        <!-- template -->
+      <!--template -->      
     </ul>
   </section>
   <!-- ----------------------------------------------- -->
 
 
   <!-- ----------------------------------------------- -->
+  <footer id="footer" class="container mt-3">
+    <template id="templateFooter"
+      <div class="card">
+          <div class="card-body d-flex justify-content-between
+              align-items-center">
+
+              <p class="lead mb-0">Total $<span> 1500 </span></p>
+              <button class="btn btn-outline-primary" >
+                Finalizar compra
+              </button>
+
+          </div>
+      </div>
+    </template>
+  </footer>
+  <!-- ----------------------------------------------- -->
+  
+  
+
+  <!-- ----------------------------------------------- -->
   <template id="template">
-    <li class="list-group-item d-flex 
-        justify-content-between
-        align-items-center">
-        <span class="lead">Frutilla</span>
-        <span class="badge bg-primary rounded-pill">12</span>
+
+    <li class="list-group-item bg-secondary text-white">
+        <span class="badge bg-primary rounded-pill
+              align-middle">12</span>
+        <span class="lead align-middl">Frutilla</span>
     </li>
+    <li class="list-group-item d-flex
+        justify-content-between align-items-center">
+        <div id="precio">
+            <p class="lead mb-0">Total: $<span>300</span></p>
+        </div>
+        <div>
+            <button class="btn btn-sm btn-danger ">Borrar </button>
+            <button class="btn btn-sm btn-success ">Agregar</button>
+        </div>
+    </li>
+
   </template>
   <!-- ----------------------------------------------- -->
+  
 
 
 <script>
 // -----------------------------------------------------------------
 // Practica    prototipo basico de carro de compra:
 
-const carrito  = document.getElementById("carrito");
-const template = document.getElementById("template");
+const carrito  = document.getElementById("carrito");    //Area del detalle de items seleccionados.
+const template = document.getElementById("template");   // 
+const footer   = document.getElementById("footer");
+const templateFooter = document.getElementById("templateFooter");
+
 const fragment = document.createDocumentFragment();
-const botones  = document.querySelectorAll('.card .btn');
+//const botones  = document.querySelectorAll('.card .btn');
+
+/*document.addEventListener("click", (e)=>{
+  console.log("Se clickeo->", e.target.dataset.fruta );
+});*/
+
+document.addEventListener("click", (e)=>{
+  //
+  if(e.target.matches(".card .btn-outline-primary")) {
+    agregarAlCarrito(e); // 1.32.46 minuto.
+  }
+});
 
 /*
 console.log('--- objetos ----');
@@ -101,77 +153,104 @@ console.log(botones);
 */
 
 // Objeto carrito :
-const carritoObjeto = {};
+const carritoObjeto = [];
+// ==========================================================
 
+
+
+// ==========================================================
 const agregarAlCarrito = (e) => {
 
     //console.log(e.target.dataset);          // <===  OJO *****
     const producto = {
-        titulo    : e.target.dataset.fruta,
-        id        : e.target.dataset.fruta,
-        cantidad  : 1
+        titulo    : e.target.dataset.fruta,       // frutilla
+        id        : e.target.dataset.fruta,       // frutilla
+        cantidad  : 1, 
+        precio    : parseInt(e.target.dataset.precio)
     }//producto
     
-    // FIND() 
-    if( carritoObjeto.hasOwnProperty(producto.titulo) ) {
-        producto.cantidad = 
-        carritoObjeto[ producto.titulo ].cantidad += 1;
-    }
-    else {
-        carritoObjeto[producto.titulo] = producto;
-    }// if 
+    //console.log( producto)
+     
 
-    pintarCarrito() 
+      // findIndex() sin =>{}
+      // NO USAR {} con findIndex()
+      const indice = carritoObjeto.findIndex( (item) =>
+          item.id === producto.id  
+      );  
+
+      // if not found()
+      if( indice === -1 ){
+          carritoObjeto.push(producto);
+          //console.log("nuevo=>", carritoObjeto );
+      }else{
+
+          carritoObjeto[indice].cantidad ++ ;
+          //console.log("CarritoObjeto precio  ===>", typeof carritoObjeto[indice].precio );
+          //console.log("CarritoObjeto cant===>", typeof carritoObjeto[indice].cantidad );
+          //console.log( "producto precio -->", typeof producto.precio);
+
+          carritoObjeto[indice].precio = 
+          (carritoObjeto[indice].cantidad * producto.precio) ;
+
+          //console.log('carrito precio: ', carritoObjeto[indice].precio );    
+      }
+
+      /*    console.log('carrito precio: ', carritoObjeto );    
+          console.log(indice); */
+          //console.log('carrito precio: ', carritoObjeto[indice].precio );    
+
+    pintarCarrito( ) ;
     //console.log(carritoObjeto);
 
 };// agregarAlCarrito
+// ==========================================================
 
 
 
+// ==========================================================
+const pintarCarrito = (  )=>{
 
-const pintarCarrito = ()=>{
-  //console.log('pintar carrito', producto );
-  carrito.textContent = '';
+  carrito.textContent = ''; // -> const carrito  = document.getElementById("carrito");
   
-  Object.values( carritoObjeto).forEach( item =>{
-      // clonar template.
-      const clone = template.content.firstElementChild.cloneNode(true);
-      clone.querySelector('.lead').textContent = item.titulo;
-      clone.querySelector('.badge').textContent = item.cantidad;
+  //Object.values( carritoObjeto).forEach( item =>{                     //  <<=========       ??????? OJO
+
+  carritoObjeto.forEach( (item) => { 
+
+      // ***** clonar template.
+      //const clone = template.content.firstElementChild.cloneNode(true);
+      const clone = template.content.cloneNode(true); 
+
+      clone.querySelector('.text-white .lead').textContent = item.titulo;
+      clone.querySelector('.text-white .badge').textContent = item.cantidad;
+      //console.log( clone.querySelector('div .span') )
+      clone.querySelector('div .lead span').textContent = item.precio;
 
       fragment.appendChild( clone );
+ 
   })//
 
   carrito.appendChild( fragment );
 
 }//pintarCarrito
+// ==========================================================
 
 
+
+// ==========================================================
+/*
 botones.forEach( (btn) =>{
   //   ojo sin () coz it runs
   btn.addEventListener("click", agregarAlCarrito )
 })//botones.forEach
-
-// -----------------------------------------------------------------
-
-/*
-
-    <p> un FIND()
-      if( carritoObjeto.hasOwnProperty(producto.titulo) ) {
-        producto.cantidad = 
-        carritoObjeto[ producto.titulo ].cantidad += 1;
-    }
-    else {
-        carritoObjeto[producto.titulo] = producto;
-    }// if 
-    </p>
-
-    <p>
-      liTemplate.content.firstElementChild.cloneNode(true);       
-    </p>
-
-
 */
+// ==========================================================
+ 
+// min  1.32
+
+
+
+
+
 </script>
 </body>
 </html>
