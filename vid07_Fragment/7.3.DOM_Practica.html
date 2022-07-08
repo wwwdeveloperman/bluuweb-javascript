@@ -54,7 +54,7 @@
             <p class="lead"> $200</p>
             <button class="btn btn-outline-primary"
                     data-fruta="manzana 🍎"
-                    data-precio="300" >
+                    data-precio="200" >
                     Agregar
             </button>
           </div>
@@ -69,6 +69,7 @@
 
 
   <!-- ----------------------------------------------- -->
+  <!-- ZONA DE ITEMS :-->
   <section class="container mt-3">
     <ul class="list-group" id="carrito">
       <!--template -->      
@@ -111,8 +112,8 @@
             <p class="lead mb-0">Total: $<span>300</span></p>
         </div>
         <div>
-            <button class="btn btn-sm btn-danger ">Borrar </button>
-            <button class="btn btn-sm btn-success ">Agregar</button>
+            <button class="btn btn-sm btn-danger ">Uno Menos </button>
+            <button class="btn btn-sm btn-success ">Uno Mas</button>
         </div>
     </li>
 
@@ -130,6 +131,7 @@ const template = document.getElementById("template");   //
 const footer   = document.getElementById("footer");
 const templateFooter = document.getElementById("templateFooter");
 
+// FRAGMENT
 const fragment = document.createDocumentFragment();
 //const botones  = document.querySelectorAll('.card .btn');
 
@@ -137,12 +139,21 @@ const fragment = document.createDocumentFragment();
   console.log("Se clickeo->", e.target.dataset.fruta );
 });*/
 
+// DELEGACION DE EVENTOS:
 document.addEventListener("click", (e)=>{
-  //
-  if(e.target.matches(".card .btn-outline-primary")) {
-    agregarAlCarrito(e); // 1.32.46 minuto.
-  }
-});
+    //
+    if(e.target.matches(".card .btn-outline-primary")) {
+      agregarAlCarrito(e); // 1.32.46 minuto.
+    }
+    // console.log(  e.target.matches("#carrito .list-group-item .btn-success")   )
+    if( e.target.matches("#carrito .list-group-item .btn-success")){
+      btnAumentar(e)
+    }
+
+     if( e.target.matches("#carrito .list-group-item .btn-danger")){
+        btnDisminuir(e)
+    }  
+  });
 
 /*
 console.log('--- objetos ----');
@@ -153,7 +164,7 @@ console.log(botones);
 */
 
 // Objeto carrito :
-const carritoObjeto = [];
+let carritoObjeto = [];
 // ==========================================================
 
 
@@ -177,7 +188,7 @@ const agregarAlCarrito = (e) => {
       const indice = carritoObjeto.findIndex( (item) =>
           item.id === producto.id  
       );  
-
+ 
       // if not found()
       if( indice === -1 ){
           carritoObjeto.push(producto);
@@ -189,9 +200,9 @@ const agregarAlCarrito = (e) => {
           //console.log("CarritoObjeto cant===>", typeof carritoObjeto[indice].cantidad );
           //console.log( "producto precio -->", typeof producto.precio);
 
-          carritoObjeto[indice].precio = 
+          /*carritoObjeto[indice].precio = 
           (carritoObjeto[indice].cantidad * producto.precio) ;
-
+          */
           //console.log('carrito precio: ', carritoObjeto[indice].precio );    
       }
 
@@ -223,15 +234,74 @@ const pintarCarrito = (  )=>{
       clone.querySelector('.text-white .lead').textContent = item.titulo;
       clone.querySelector('.text-white .badge').textContent = item.cantidad;
       //console.log( clone.querySelector('div .span') )
-      clone.querySelector('div .lead span').textContent = item.precio;
+      clone.querySelector('div .lead span').textContent = item.precio*item.cantidad;
+      
+      // CREAR ID  a los botones :
+      clone.querySelector(".btn-danger").dataset.id = item.id   //  <========                     OJO
+      clone.querySelector(".btn-success").dataset.id = item.id
 
+      // APPEND
       fragment.appendChild( clone );
  
   })//
-
+  // APPEND:
   carrito.appendChild( fragment );
 
-}//pintarCarrito
+};///pintarCarrito
+// ==========================================================
+
+
+
+// ==========================================================
+const btnAumentar = (e) => {
+
+  //console.log('+', e.target.dataset.id);        //   Disp
+  
+  // ITERAR map()
+  carritoObjeto = carritoObjeto.map( (item) =>{
+
+    if ( item.id === e.target.dataset.id ){
+        item.cantidad ++;
+    }
+    return item;
+  });
+
+  pintarCarrito();
+  
+}; // btnAumentar
+// ==========================================================
+
+
+
+// ==========================================================
+/*
+if( e.target.matches("#carrito .list-group-item .btn-success")){
+    btnAumentar(e)
+}*/
+
+const btnDisminuir = (e) =>{
+    // console.log('-', e.target.dataset.id);
+
+    carritoObjeto = carritoObjeto.filter( (item) =>{
+        
+       if( item.id === e.target.dataset.id ){
+            if( item.cantidad > 0){
+              item.cantidad --;
+              if( item.cantidad === 0) {
+                return; // No retorna un item. se borra.
+              }
+              return item; 
+            }  
+        }else {
+            return item; // resto de items siguen en carritoObj
+        }
+
+    });
+
+    pintarCarrito();
+
+}
+
 // ==========================================================
 
 
