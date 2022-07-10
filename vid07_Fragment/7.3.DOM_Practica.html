@@ -10,12 +10,13 @@
 </head>
 
 <body>
+
   <h2 class="text-center">Carrito Reyes Leiva </h2>
 
 
 <!-- ----------------------------------------------- -->
-  <main class="container mt-3">
-    <div class="row text-center">
+<main class="container mt-3">
+  <div class="row text-center">
 
       <article class="col-sm-4 mb-3">
         <div class="card">
@@ -23,7 +24,7 @@
             <h5 class="card-title">frutilla 🍓</h5>
             <p class="lead"> $300</p>
             <button class="btn  btn-outline-primary"
-                    data-fruta="frutilla 🍓"
+                    data-fruta="frutilla 🍓"        // ojo
                     data-precio="300" >
                     Agregar
             </button>
@@ -38,7 +39,7 @@
             <h5 class="card-title">Banana 🍌</h5>
             <p class="lead"> $100</p>
             <button class="btn btn-outline-primary"
-                    data-fruta="banana 🍌" 
+                    data-fruta="banana 🍌"         // ojo
                     data-precio="100" >
                     Agregar
             </button>
@@ -53,84 +54,91 @@
             <h5 class="card-title">Manzana 🍎</h5>
             <p class="lead"> $200</p>
             <button class="btn btn-outline-primary"
-                    data-fruta="manzana 🍎"
+                    data-fruta="manzana 🍎"        // ojo
                     data-precio="200" >
                     Agregar
             </button>
           </div>
         </div>
       </article>
-    </div>
-      
+
+  </div>
+</main>
+<!-- ----------------------------------------------- -->
 
 
-  </main>
-  <!-- ----------------------------------------------- -->
+<!-- ----------------------------------------------- -->
+<!-- ZONA DE ITEMS :-->
+<section class="container mt-3">
+  <ul class="list-group"  id="carrito">
+    <!--<template> -->      
+  </ul>
+</section>
 
+<template id="template">
 
-  <!-- ----------------------------------------------- -->
-  <!-- ZONA DE ITEMS :-->
-  <section class="container mt-3">
-    <ul class="list-group" id="carrito">
-      <!--template -->      
-    </ul>
-  </section>
-  <!-- ----------------------------------------------- -->
-
-
-  <!-- ----------------------------------------------- -->
-  <footer id="footer" class="container mt-3">
-    <template id="templateFooter"
-      <div class="card">
-          <div class="card-body d-flex justify-content-between
-              align-items-center">
-
-              <p class="lead mb-0">Total $<span> 1500 </span></p>
-              <button class="btn btn-outline-primary" >
-                Finalizar compra
-              </button>
-
-          </div>
+  <li class="list-group-item    bg-secondary text-white">
+      <span class="badge bg-primary rounded-pill
+            align-middle"> 12 </span>
+      <span class="lead align-middl"> Frutilla </span>
+  </li>
+    
+  <li class="list-group-item    d-flex
+              justify-content-between   align-items-center">
+      <div id="precio">
+          <p class="lead mb-0">Total: $<span>300</span></p>
       </div>
-    </template>
-  </footer>
-  <!-- ----------------------------------------------- -->
+      <div>
+          <button class="btn  btn-sm  btn-danger ">Uno Menos </button>
+          <button class="btn  btn-sm  btn-success ">Uno Mas</button>
+      </div>
+  </li>
+    
+</template>
+<!-- ----------------------------------------------- -->  
+
+
+<!-- ----------------------------------------------- -->
+<footer id="footer" class="container mt-3">
+  <!-- <templateFooter>-->
+</footer>
+
+<template id="templateFooter">
+  <div class="card">
+      <div class="card-body d-flex justify-content-between
+          align-items-center">
+
+          <p class="lead mb-0">Total $<span> 1500 </span></p>
+          <button class="btn btn-outline-primary" >
+            Finalizar compra
+          </button>
+
+      </div>
+  </div>
+</template>  
+<!-- ----------------------------------------------- -->
   
   
 
-  <!-- ----------------------------------------------- -->
-  <template id="template">
 
-    <li class="list-group-item bg-secondary text-white">
-        <span class="badge bg-primary rounded-pill
-              align-middle">12</span>
-        <span class="lead align-middl">Frutilla</span>
-    </li>
-    <li class="list-group-item d-flex
-        justify-content-between align-items-center">
-        <div id="precio">
-            <p class="lead mb-0">Total: $<span>300</span></p>
-        </div>
-        <div>
-            <button class="btn btn-sm btn-danger ">Uno Menos </button>
-            <button class="btn btn-sm btn-success ">Uno Mas</button>
-        </div>
-    </li>
-
-  </template>
-  <!-- ----------------------------------------------- -->
   
 
 
 <script>
 // -----------------------------------------------------------------
-// Practica    prototipo basico de carro de compra:
 
+
+
+
+
+
+
+// ===================================================================================
+// con querySelector llevaa (#)   ojo
 const carrito  = document.getElementById("carrito");    //Area del detalle de items seleccionados.
 const template = document.getElementById("template");   // 
 const footer   = document.getElementById("footer");
 const templateFooter = document.getElementById("templateFooter");
-
 // FRAGMENT
 const fragment = document.createDocumentFragment();
 //const botones  = document.querySelectorAll('.card .btn');
@@ -139,10 +147,13 @@ const fragment = document.createDocumentFragment();
   console.log("Se clickeo->", e.target.dataset.fruta );
 });*/
 
+// Objeto carrito :
+let carritoObjeto = [];
+
 // DELEGACION DE EVENTOS:
 document.addEventListener("click", (e)=>{
     //
-    if(e.target.matches(".card .btn-outline-primary")) {
+    if(e.target.matches(".card button")) {
       agregarAlCarrito(e); // 1.32.46 minuto.
     }
     // console.log(  e.target.matches("#carrito .list-group-item .btn-success")   )
@@ -153,7 +164,8 @@ document.addEventListener("click", (e)=>{
      if( e.target.matches("#carrito .list-group-item .btn-danger")){
         btnDisminuir(e)
     }  
-  });
+
+});
 
 /*
 console.log('--- objetos ----');
@@ -162,9 +174,6 @@ console.log(template);
 console.log(fragment);
 console.log(botones);
 */
-
-// Objeto carrito :
-let carritoObjeto = [];
 // ==========================================================
 
 
@@ -247,6 +256,9 @@ const pintarCarrito = (  )=>{
   // APPEND:
   carrito.appendChild( fragment );
 
+
+  pintarFooter(); //                        ----->
+
 };///pintarCarrito
 // ==========================================================
 
@@ -267,6 +279,7 @@ const btnAumentar = (e) => {
   });
 
   pintarCarrito();
+  //pintarFooter();
   
 }; // btnAumentar
 // ==========================================================
@@ -287,7 +300,7 @@ const btnDisminuir = (e) =>{
        if( item.id === e.target.dataset.id ){
             if( item.cantidad > 0){
               item.cantidad --;
-              if( item.cantidad === 0) {
+              if( item.cantidad === 0) {      // <<=== ojo ===
                 return; // No retorna un item. se borra.
               }
               return item; 
@@ -299,9 +312,29 @@ const btnDisminuir = (e) =>{
     });
 
     pintarCarrito();
-
+    //pintarFooter();
 }
+// ==========================================================
 
+
+// ==========================================================
+const pintarFooter=()=> {
+
+    footer.textContent = "";
+    // NO PUEDEN HABER {}                     // <-------       OJO 
+    const total = carritoObjeto.reduce( (acc, item) => 
+      acc +  item.cantidad * item.precio , 0
+    );
+
+    console.log( 'total==> ',total);
+    
+    //            templateFooter
+    const clone = templateFooter.content.cloneNode( true );
+    clone.querySelector( '.card p span' ).textContent = total ;
+
+    //
+    footer.appendChild( clone );
+};
 // ==========================================================
 
 
