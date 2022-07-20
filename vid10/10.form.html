@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bootstrap Site</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+</head>
+<body>
+
+
+
+<div class="container">
+  <h1>Formulario</h1>
+
+
+  <form id="formulario" novalidate action="">
+
+    <input
+        class="form-control mb-2 "
+        type = "text"
+        name = "userName"
+        placeholder="ingrese nombre"
+        autocomplete = "off"
+        id="userName"
+        required
+        minlength="3"
+        maxlength="30"
+        pattern="^[A-Za-zñÑáéíóú\s]+$"
+        title="solo letras en el nombre"
+    />
+    
+    <p class="text-danger mb-2 d-none" 
+       id="alert_Name"> aviso de error</p>
+
+
+    
+    <input
+        class="form-control mb-2 "
+        type="email"
+        placeholder="Ingrese correo"
+        name="userEmail"
+        id="userEmail"
+        autocomplete="off"
+        required
+        pattern="^[a-z0-9_-]+(\.[_a-z0-9_-]+)*@[a-z0-9_-]+(\.[a-z0-9_-]+)*(\.[a-z]{2,15})$"
+        title="Ingrese un correo valido"
+    />
+
+    <p  class="text-danger mb-2 d-none" 
+        id="alert_Email"> aviso de error</p>
+
+
+
+    <button type="submit" 
+            class="btn btn-primary">
+            E n v i a r
+    </button>
+
+
+  </form>
+
+
+
+  <div class="alert alert-success my-2 d-none text-primary" 
+       id="alertSuccess">
+    mensaje enviado con exito.
+  </div>
+
+
+</div>
+
+
+
+
+<script>
+// -------------------------------------------------------------------------------------------------
+  // JAVASCRIPT
+  const formulario = document.getElementById("formulario")
+  //const formulario = document.querySelector("#formulario")
+  // o "form"
+  const userName = document.getElementById("userName")
+  const userEmail = document.getElementById("userEmail")
+  // O bien :
+  /*
+  const formulario = document.querySelector("#formulario");
+  const userName = document.querySelector("input[name='userName']");
+  const userEmail = document.querySelector("input[name='userEmail']");
+  */
+
+  const alertSuccess = document.getElementById("alertSuccess");
+  const alertName    = document.getElementById("alert_Name");
+  const alertEmail   = document.getElementById("alert_Email");
+
+  const regUserName = /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/;
+  const regUserEmail = /^[a-z0-9_-]+(\.[_a-z0-9_-]+)*@[a-z0-9_-]+(\.[a-z0-9_-]+)*(\.[a-z]{2,15})$/ ;
+// -------------------------------------------------------------------------------------------------
+
+
+// -------------------------------------------------------------------------------------------------
+userName.addEventListener("click", (e)=> {
+  alert_Name.classList.add('d-none')
+})
+
+userEmail.addEventListener("click", (e)=> {
+  alert_Email.classList.add('d-none')
+})
+// -------------------------------------------------------------------------------------------------
+
+
+// -------------------------------------------------------------------------------------------------
+// tambien con: createElement, template, fragment.
+const pintarMensajeExito = () =>{
+    alertSuccess.classList.remove('d-none')
+    alertSuccess.textContent = "Mensaje enviado con exito"
+}//
+// -------------------------------------------------------------------------------------------------
+
+
+// -------------------------------------------------------------------------------------------------
+const pintarMensajeError = (errores) =>{
+
+  errores.forEach( err => {
+      err.tipo.classList.remove('d-none')
+      // alertName.textContent = 'formato de nombre no valido'
+      // alertEmail.textContent = 'Escriba un correo valido'
+      err.tipo.textContent = err.msg                  // <<=====                              OJO
+      err.tipo.classList.add("is-invalid")
+  })
+}//
+// -------------------------------------------------------------------------------------------------
+
+
+// -------------------------------------------------------------------------------------------------
+formulario.addEventListener("submit", e => {
+    
+    e.preventDefault()
+    alertSuccess.classList.add('d-none')
+    
+    const errores = [];
+    
+    // ---------------------------------------------------------------
+    if( !regUserName.test(userName.value) || !userName.value.trim() ){
+        userName.classList.add("is-invalid")
+        errores.push( {
+          tipo: alertName,
+          msg: 'formato de nombre no valido'
+        })
+    }else{
+      userName.classList.remove("is-invalid")
+      userName.classList.add("is-valid")
+      alert_Name.classList.add("d-none")
+    }
+    
+    if( !regUserEmail.test(userEmail.value)  ){
+        userEmail.classList.add("is-invalid")
+        errores.push( {
+          tipo: alertEmail,
+          msg: "Escriba un correo valido"
+        })
+    }else{
+      userEmail.classList.remove("is-invalid")
+      userEmail.classList.add("is-valid")
+      alert_Email.classList.add("d-none")
+    }
+    // ---------------------------------------------------------------
+    
+    // si hay errores :
+    if( errores.length !== 0 ){
+        pintarMensajeError( errores )
+        return
+    }
+    
+    console.log('datos correctos. se enviaran al servidor.!!!');
+    pintarMensajeExito();
+    
+})//formulario.addEventListener()
+// -------------------------------------------------------------------------------------------------
+
+
+
+</script>
+</body>
+</html>

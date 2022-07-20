@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bootstrap Site</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+</head>
+<body>
+<h1>Formularios</h1>
+
+
+
+
+
+
+<script>
+/*
+// notación literal
+const regExpLiteral = /bluuweb/i
+
+// notación de objeto
+const regExpObjeto = new RegExp("bluuweb", "i")
+
+
+Flags de una RegExp
+===================
+i ignora mayusculas o minusculas
+g buskeda global
+m multilinea permite a ^ y $ tratar los finales de linea \r o \n
+
+
+
+Métodos de RegExp
+=================
+El método test() ejecuta la búsqueda de una ocurrencia entre una expresión regular y una cadena especificada. Devuelve true o false.
+
+Retorna true si existe una coincidencia entre la expresión regular y la cadena especificada; de lo contrario retorna false.
+Use test()cuando desee saber si existe la ocurrencia de un patrón en una cadena
+
+console.log(regExpLiteral.test("Bluuweb")); // true
+console.log(regExpLiteral.test("bluweb")); // false
+
+Carácteres especiales
+=====================
+
+[ ]   Rango de carácteres. Cualquiera de los caracteres del interior de los corchetes.
+|     Establece una alternativa: lo que está a la izquierda o lo que está a la derecha.
+
+Ejemplo:
+------------------------------------------------
+const regExpLiteral = /[ue]/gi;
+
+console.log(regExpLiteral.test("bluuweb"));
+console.log(regExpLiteral.test("ignacio"));
+
+const regExpLiteral = /bluweb|bluuweb/gi;
+const str = "bluuweb";
+
+console.log( regExpLiteral.test(str) );
+------------------------------------------------
+
+
+
+Solo números:
+//------------------------------------------------
+const regExpLiteral = /^\d+$/gi;
+const str = "bluuweb123";
+
+console.log(regExpLiteral.test(str));
+//------------------------------------------------
+
+
+
+Solo letras (sin tildes):
+//------------------------------------------------
+const regExpLiteral = /^[a-zA-Z ]*$/;
+const str = "bluuweb";
+
+console.log(regExpLiteral.test(str));
+//------------------------------------------------
+
+
+Solo letras (con tildes):
+//------------------------------------------------
+/^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/
+//------------------------------------------------
+
+
+
+//------------------------------------------------
+Validar email:
+
+/^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$/
+//------------------------------------------------
+
+
+#Validación Formularios
+=======================
+
+*/
+
+/* *********************************************************************************************
+//    https://sg.com.mx/content/view/545          tal vez el MEJOR TUTORIAL.!!!
+//
+********************************************************************************************* */
+
+
+
+// buscar el patron 'bluuweb' dentro de una cadena. 
+// Objeto regExp guarda el patron a buscar
+// formato /patron/flag 
+let regExp0 = /bluuweb/i
+//o bien:
+const regExp1 = new RegExp("bluuweb",'i' ) //  es como  regExp1="bluuweb"
+
+// buscar con  test el patron guardado en el objeto regExp0 (bluuweb)
+// dentro de la cadena entre comillas.
+console.log('busca bluuweb->', regExp0.test("bluuweb enseña javascript") );
+
+// -> true     bluuweb si esta en regExp0
+console.log('busca bluuweb->', regExp1.test("bluu web enseña javascript") );
+
+
+
+
+// # CARACTERES ESPECIALES 
+// 
+console.log('------ BUSKEDA DE CARACTERES -------------');
+
+regExp0 = /[ew]/i         // patron a buscar ->  'we'
+console.log('Existe /[ew]/i ->bluuweb tiene javascript otra aca', regExp0.test("bluuweb tiene javascript otra aca")); //true
+
+// OR  
+regExp0 = /bluweb|bluuweb/i;
+console.log( '/bluweb|bluuweb/i --->la bluweb no es. seria bluuweb',  regExp0.test("la bluweb no es. seria bluuweb") );
+
+
+/* El uso de la función constructora proporciona una compilación en tiempo de EJECUCION
+de la expresión regular. Usa la función constructora cuando sepas que el patrón de la 
+expresión regular cambiará, o no conoces el patrón y lo obtienes de otra fuente, como 
+la entrada del usuario. */
+
+
+// CREANDO UN OBJETO
+const ObjetoPatron = new RegExp("bluuweb|bluweb","i");
+console.log("obj = new RegExp('bluuweb|bluweb', 'i') ---> obj.test('blu-fast-web') ",  ObjetoPatron.test("blu-fast-web")  ); // false
+
+//
+
+/*
+[0-9] Un dígito del 0 al 9.
+[A-Z] Letra mayúscula de la A a la Z. Excluye ñ o letras acentuadas.
+[a-z] Letra minúscula de la a a la z. Excluye ñ o letras acentuadas.
+[A-Za-z0-9] Carácter alfanumérico (letra mayúscula, minúscula o dígito).
+*/
+
+
+//------------------------------------------------
+const regExpLiteral = /[0-9]/gi;
+const str = "cadena con numero 234 de la direccion";
+console.log('\n', str);
+console.log('/[0-9]/gi -->', regExpLiteral.test(str) );
+//------------------------------------------------
+
+
+//------------------------------------------------
+{
+const regExpLiteral = /[a-z]/gi;
+const str = "88354 bluuweb13";
+console.log('\n', str);
+console.log( '/[a-z]/gi', regExpLiteral.test(str));
+
+}
+//------------------------------------------------
+
+
+//------------------------------------------------
+{
+const regExpLiteral = /[A-Za-z0-9]/gi ;
+const str = "aguila2022";
+console.log('\n', str);
+console.log('\n SOLO letras y nros', str);
+console.log( '/[A-Za-z0-9]/gi', regExpLiteral.test(str));
+
+}
+//------------------------------------------------
+
+
+//------------------------------------------------
+{
+const regExp = /^\d+$/gi ;
+console.log('\n' );
+
+console.log('--- solo nros----\n' );
+console.log('regExp = /^\d+$/gi \n');
+
+console.log('.test( "9871 A 23654")', regExp.test( "9871a23654") );
+console.log( '.test( "987123654")',regExp.test( "987123654") );
+}
+//------------------------------------------------
+
+
+//------------------------------------------------
+// SOLO letras
+{   
+    const regExp = /^[a-zA-Z]*$/
+    const str = "nombredeusuario@gmail.com"
+    const str2 = "nombredeusuariogmailcom"
+    console.log("\n ---- solo letras ----");
+    
+    console.log('cadena-> nombredeusuario@gmail.com --->', regExp.test(str)  );
+    console.log('cadena-> nombredeusuariogmailcom --->', regExp.test(str2)  );
+}
+//------------------------------------------------
+
+
+// -------------------------------------------------------------------------------------
+// EMAIL :
+{
+  const regExp = /^[a-z0-9_-]+(\.[_a-z0-9_-]+)*@[a-z0-9_-]+(\.[a-z0-9_-]+)*(\.[a-z]{2,15})$/
+  //
+  const str0 = "luchoprogrammer@gmail.com"
+  const str1 = "luchoprogrammer123123@gmail.com"
+  
+  const str2 = "lucho@programmer@gmail.com"
+
+  const str3 = "lucho_programmer@gmail.com"
+
+  const str4 = "luchoatgmail.com"
+  //
+  console.log('\n ------- Email: ---------');
+  //
+  console.log( str0, regExp.test( str0 )   );     //  true
+  console.log( str1, regExp.test( str1 )   );     //  true
+  //
+  console.log( str2, regExp.test( str2 )   );      // 2 @   false
+  console.log( str3, regExp.test( str3 )   );      //  _  true
+  console.log( str4, regExp.test( str4 )   );      // !@   false
+}
+// -------------------------------------------------------------------------------------
+
+
+
+
+/*/ TESTEADORES : 
+exec(), test(), RegExp, match(), matchAll(), replace(), replaceAll(), search(), split().
+
+*/
+
+
+</script>
+</body>
+</html>
