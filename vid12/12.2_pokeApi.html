@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bootstrap Site</title>
+
+  <!-- CSS only -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+
+</head>
+<body>
+<h1>Poke Api</h1>
+
+<main>
+  <div class="container my-5">
+
+    <section class="d-flex align-items-center" id="loading">
+        <strong>Loading...</strong>
+        <div
+            class="spinner-border ms-auto"
+            role="status"
+            aria-hidden="true"
+        ></div>
+    </section>
+
+    <div class="row" id="card-dinamica">
+        
+    </div>
+    
+    <template id="template-card">
+      <article class="col-md-6 col-lg-3 mb-3">
+          <div class="card text-center shadow">
+              <img
+                  src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png"
+                  alt=""
+                  class="card-img-top"
+              />
+              <div class="card-body">
+                  <h5 class="card-title text-primary lead">
+                      Rick Sanchez
+                  </h5>
+                  <p class="lead text-secondary">Human</p>
+              </div>
+          </div>
+      </article>
+    </template>
+
+
+
+
+  </div> <!-- container -->
+</main>     
+
+
+
+<script>
+// 
+document.addEventListener("DOMContentLoaded", () => {
+    fetchData();
+});
+
+const cards = document.querySelector("#card-dinamica");
+const templateCard = document.querySelector("#template-card").content;
+
+const fetchData = async () => {
+    try {
+        loadingData(true);
+
+        const res = await fetch("https://rickandmortyapi.com/api/character");
+        const data = await res.json();
+
+        pintarDatos(data);
+    } catch (error) {
+        console.log(error);
+    } finally {
+        loadingData(false);
+    }
+};
+
+const loadingData = (estado) => {
+    const loading = document.querySelector("#loading");
+    if (estado) {
+        loading.classList.remove("d-none");
+    } else {
+        loading.classList.add("d-none");
+    }
+};
+
+const pintarDatos = (data) => {
+    const fragment = document.createDocumentFragment();
+
+    cards.textContent = "";
+
+    data.results.forEach((item) => {
+        const clone = templateCard.cloneNode(true);
+        clone.querySelector("h5").textContent = item.name;
+        clone.querySelector("p").textContent = item.species;
+        clone.querySelector("img").setAttribute("src", item.image);
+
+        fragment.appendChild(clone);
+    });
+    cards.appendChild(fragment);
+};
+
+
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+</body>
+</html>
